@@ -3,6 +3,51 @@ const btn = document.getElementById("submit-btn")
 const row = document.getElementById("all-meals")
 
 
+
+
+const initalData = async () => {
+    
+    const url = `https://www.themealdb.com/api/json/v1/1/categories.php`
+    const res = await fetch(url)
+    const data = await res.json()
+   const categorys = data.categories
+    for (const category of categorys) {
+
+        const collam = document.createElement("div")
+        collam.classList.add("col-lg-4")
+        collam.classList.add("col-md-4")
+        collam.classList.add("col-sm-6")
+        collam.classList.add("col-10")
+        collam.classList.add("mx-auto")
+
+        collam.innerHTML = `
+                <div class="card">
+                <img width="200px" height="300px" src="${category.strCategoryThumb}" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">${category.strCategory}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            `
+
+        row.appendChild(collam)
+        
+        
+        
+    }
+
+
+
+}
+initalData()
+
+
+
+
+
+
+
 btn.addEventListener("click", (e) => {
     e.preventDefault()
     const inputValue = input.value;
@@ -14,7 +59,7 @@ btn.addEventListener("click", (e) => {
             const res = await fetch(url)
             const data = await res.json()
             displayData(data.meals)
-           
+
 
         }
         loadMeal()
@@ -32,8 +77,8 @@ const displayData = data => {
         collam.classList.add("col-sm-6")
         collam.classList.add("col-10")
         collam.classList.add("mx-auto")
-        
-        collam.innerHTML = ` 
+
+        collam.innerHTML = `
                 <div class="card">
                 <img width="200px" height="300px" src="${data.strMealThumb}" class="card-img-top" alt="...">
                 <div class="card-body">
